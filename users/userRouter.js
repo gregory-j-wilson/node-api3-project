@@ -38,13 +38,13 @@ router.post("/:id/posts", logger, (req, res) => {
           })
     })
     .catch((err) => {
-      res.status(500).json({ error: "New user could not be posted." });
+      res.status(500).json({ error: "New post could not be posted." });
     });
 });
 
 
 
-router.get("/", async (req, res) => {
+router.get("/", logger, async (req, res) => {
   try {
     await userDb.get().then((resp) => {
       users = resp;
@@ -57,7 +57,7 @@ router.get("/", async (req, res) => {
 
 
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", logger, async (req, res) => {
   try {
     await userDb.getById(req.params.id).then((resp) => {
       user = resp;
@@ -70,22 +70,51 @@ router.get("/:id", async (req, res) => {
 
 
 
-router.get("/:id/posts", (req, res) => {
-  // do your magic!
+router.get("/:id/posts", logger, (req, res) => {
+   
+    postDb.get()
+      .then(posts => {
+        filteredPosts = posts.filter((post) => Number(post.user_id) === Number(req.params.id))
+        res.status(201).json(filteredPosts)
+      })
+      .catch(err => {
+        res.status(500).json({ message: "Couldn't load posts for the specific user." });
+      })
+
 });
 
 
 
 
-router.delete("/:id", (req, res) => {
-  // do your magic!
+router.delete("/:id", logger, (req, res) => {
+  
+    userDb.remove(req.params.id)
+      .then(number => {
+        console.log(`${number} item(s) deleted.`)
+        res.status(204).end()
+      })
+      .catch(err => {
+        res.status(500).json({ errorMessage: "The user could not be removed." })
+      })
+
 });
 
 
 
 
-router.put("/:id", (req, res) => {
-  // do your magic!
+router.put("/:id", logger, (req, res) => {
+
+    const updatedUser = req.body
+  
+    userDb.update(req.params.id, updatedUser)
+      .then(count => {
+        console.log(`${count} user(s) updated.`)
+        res.status(200).json(updatedUser)
+      })
+      .catch(err => {
+        res.status(500).json({ errorMessage: "The user could not be updated." })
+      })
+
 });
 
 
