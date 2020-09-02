@@ -10,12 +10,12 @@ You are allowed, and **encouraged**, to collaborate with other peers. Please fol
 
 ## Project Set Up
 
-- [ ] Create a forked copy of this project.
-- [ ] Add your `Team Lead` as collaborator on Github.
-- [ ] Clone your OWN version of the repository.
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Add your `Team Lead` as collaborator on Github.
+- [x] Clone your OWN version of the repository.
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+- [x] Push commits: git push origin `<firstName-lastName>`.
 
 Follow these steps for completing your project.
 
@@ -58,7 +58,7 @@ Follow these steps for completing your project.
 
 There are two helper files that you can use to manage the persistence of _users_ and _posts_ data. These files are `users/userDb.js` and `posts/postDb.js`. Both files publish the following api:
 
-- `get()`: calling find returns a promise that resolves to an array of all the `resources` contained in the database.
+- `get()`: calling get returns a promise that resolves to an array of all the `resources` contained in the database.
 - `getById()`: takes an `id` as the argument and returns a promise that resolves to the `resource` with that id if found.
 - `insert()`: calling insert passing it a `resource` object will add it to the database and return the new `resource`.
 - `update()`: accepts two arguments, the first is the `id` of the `resource` to update and the second is an object with the `changes` to apply. It returns the count of updated records. If the count is 1 it means the record was updated correctly.
