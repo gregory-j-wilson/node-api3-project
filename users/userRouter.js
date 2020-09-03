@@ -75,7 +75,7 @@ router.get("/:id/posts", logger, validateUserId, (req, res) => {
     postDb.get()
       .then(posts => {
         filteredPosts = posts.filter((post) => Number(post.user_id) === Number(req.params.id))
-        res.status(201).json(filteredPosts)
+        res.status(200).json(filteredPosts)
       })
       .catch(err => {
         res.status(500).json({ message: "Couldn't load posts for the specific user." });
@@ -168,12 +168,10 @@ function validatePost(req, res, next) {
 
 function logger(req, res, next) {
   console.log(
-    `a ${req.method} request was made to ${
-      req.url
-    } at ${new Date().toISOString()}.`
+    `a ${req.method} request was made to ${req.url} at ${new Date().toISOString()}.`
   );
-
   next();
 }
+
 
 module.exports = router;
