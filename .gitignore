@@ -1,6 +1,10 @@
 # Let students use Yarn
 package-lock.json
 
+# dotenv environment variables file
+.env
+
+
 # Logs
 logs
 *.log

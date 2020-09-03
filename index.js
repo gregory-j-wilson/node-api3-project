@@ -1,6 +1,8 @@
 const express = require("express"); // importing a CommonJS module
 const helmet = require("helmet");
 
+require('dotenv').config();
+
 const server = express();
 
 const postRouter = require('./posts/postRouter')
@@ -16,6 +18,8 @@ server.use('/api/users', userRouter)
 
 module.exports = server;
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
-server.listen(port, () => console.log('server up...'));
+server.listen(port, () => {
+  console.log(`\n*** Server Running on http://localhost:${port} ***\n`);
+});
