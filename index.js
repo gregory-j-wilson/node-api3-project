@@ -12,10 +12,11 @@ const userRouter = require('./users/userRouter')
 
 
 server.use(express.json()); // built-in middleware
+server.use(cors())
 server.use(helmet()); // 3rd party middleware
 server.use('/api/posts', postRouter)
 server.use('/api/users', userRouter)
-server.use(cors())
+
 
 
 // var corsOptions = {
